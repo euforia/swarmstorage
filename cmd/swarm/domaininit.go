@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/richardliao/swarm/modules/swarm"
 	"os"
+
+	"github.com/euforia/swarmstorage/modules/swarm"
 )
 
 var cmdDomaininit = &Command{

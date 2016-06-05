@@ -59,14 +59,14 @@ The process is:
 
 The requester first build a broadcast task and register it with a RespChan.
 
-broadcastServer receive the task and queue it. Get task from queue and 
+broadcastServer receive the task and queue it. Get task from queue and
 broadcast it out.
 
-broadcastReqListener receive broadcast request, check and response to 
+broadcastReqListener receive broadcast request, check and response to
 broadcastRespListener if block exists.
 
-broadcastRespListener receive response and add it to respListenerChan, which 
-will be received by broadcastServer, then send it back to RespChan of task. 
+broadcastRespListener receive response and add it to respListenerChan, which
+will be received by broadcastServer, then send it back to RespChan of task.
 
 Requester get result and ack broadcastServer in AckChan of task, and do further
 for the result.
@@ -93,7 +93,7 @@ func (this *BroadcastReqListener) Start(r Restartable, e interface{}) {
 	logger.Critical("BroadcastReqListener started.")
 
 	// listen
-	raddr := &net.UDPAddr{net.ParseIP(MULTICAST_ADDR), BROADCAST_REQ_PORT}
+	raddr := &net.UDPAddr{IP: net.ParseIP(MULTICAST_ADDR), Port: BROADCAST_REQ_PORT}
 	//socket, err := net.ListenMulticastUDP("udp", ifi, raddr)
 	socket, err := net.ListenMulticastUDP("udp", nil, raddr)
 	checkFatal(err)
@@ -260,7 +260,7 @@ func (this *BroadcastServer) Start(r Restartable, e interface{}) {
 
 		case task := <-REGISTER_CHAN:
 			//logger.Debug("broadcastServer get task")
-			// register task 
+			// register task
 			tasks[task.TaskId] = task
 
 		default:

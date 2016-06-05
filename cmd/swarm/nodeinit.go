@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/richardliao/swarm/modules/swarm"
+	"github.com/euforia/swarmstorage/modules/swarm"
 	"io/ioutil"
 	"os"
 	"path"
@@ -18,10 +18,10 @@ Command nodeinit create new swarm node environment specified in nodebase flag.
 }
 
 var (
-	nodeinitNodebase       = cmdNodeinit.Flag.String("nodebase", "/data/swarm", "Path to the new swarm node environment, must exist")
-	nodeinitDomaincert     = cmdNodeinit.Flag.String("domaincert", "", "Path to the domain cert file")
-	nodeinitNodeaddress    = cmdNodeinit.Flag.String("nodeaddress", "", "Node address")
-	nodeinitOSSaddress     = cmdNodeinit.Flag.String("ossaddress", "", "Object server address, can be same with nodeaddress")
+	nodeinitNodebase    = cmdNodeinit.Flag.String("nodebase", "/data/swarm", "Path to the new swarm node environment, must exist")
+	nodeinitDomaincert  = cmdNodeinit.Flag.String("domaincert", "", "Path to the domain cert file")
+	nodeinitNodeaddress = cmdNodeinit.Flag.String("nodeaddress", "127.0.0.1", "Node address")
+	nodeinitOSSaddress  = cmdNodeinit.Flag.String("ossaddress", "127.0.0.1", "Object server address, can be same with nodeaddress")
 )
 
 func init() {

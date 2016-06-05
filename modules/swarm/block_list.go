@@ -1,7 +1,7 @@
 package swarm
 
 import (
-	"github.com/richardliao/swarm/third_party/github.com/ryszard/goskiplist/skiplist"
+	"github.com/euforia/swarmstorage/third_party/github.com/ryszard/goskiplist/skiplist"
 	"sync"
 )
 

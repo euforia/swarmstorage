@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/richardliao/swarm/modules/swarm"
+	"github.com/euforia/swarm/modules/swarm"
 )
 
 var cmdVersion = &Command{

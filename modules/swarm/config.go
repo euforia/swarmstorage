@@ -6,10 +6,11 @@ import (
 	"crypto/sha1"
 	"encoding/json"
 	"fmt"
-	"github.com/richardliao/swarm/third_party/code.google.com/p/goconf/conf"
 	"path"
 	"sort"
 	"time"
+
+	"github.com/euforia/swarmstorage/third_party/code.google.com/p/goconf/conf"
 )
 
 var (
@@ -38,7 +39,7 @@ var (
 	// block
 	BLOCK_SIZE int = 4194304 // 4<<20
 	// consistent hash
-	DOMAIN_RING_SPOTS  int = 4
+	DOMAIN_RING_SPOTS  int     = 4
 	DEVICE_WEIGHT_UNIT float64 = 943718400 // 0.9TB
 	// replica
 	REPLICA     int = 3
@@ -59,10 +60,10 @@ var (
 	// rebalance
 	REBALANCE_INTERVAL            time.Duration = 10 * time.Second
 	GC_INTERVAL                   time.Duration = 1 * time.Second
-	MAX_CONCURRENT_REPAIR         int = 4
+	MAX_CONCURRENT_REPAIR         int           = 4
 	MAX_REBALANCE_IDLE            time.Duration = 600 * time.Second
-	MAX_CONCURRENT_REBALANCE      int = 4
-	MAX_CONCURRENT_GC             int = 4
+	MAX_CONCURRENT_REBALANCE      int           = 4
+	MAX_CONCURRENT_GC             int           = 4
 	QUERY_REBALANCE_CACHE_TIMEOUT time.Duration = 120 * time.Second
 	REBALANCE_OUT_TIME            time.Duration = 60 * time.Second
 	// reliable
@@ -72,7 +73,7 @@ var (
 	POLL_NEIGHBOR_INTERVAL     time.Duration = 2 * time.Second
 	NODE_CLEANUP_TIME          time.Duration = 400 * time.Second
 	NODE_OUT_TIME              time.Duration = 30 * time.Second
-	GOSSIP_NOTIFY_QUEUE_LENGTH int = 5
+	GOSSIP_NOTIFY_QUEUE_LENGTH int           = 5
 	// throttle
 	CPU_BUSY_THROTLLE  uint64 = 90
 	DISK_BUSY_THROTLLE uint64 = 50
@@ -82,52 +83,52 @@ var (
 )
 
 func getDomainConfig() (m map[string]interface{}) {
-    m = make(map[string]interface{})
-    m["MULTICAST_ADDR"] = MULTICAST_ADDR
-    m["BLOCK_SIZE"] = BLOCK_SIZE
-    m["DOMAIN_RING_SPOTS"] = DOMAIN_RING_SPOTS
-    m["DEVICE_WEIGHT_UNIT"] = DEVICE_WEIGHT_UNIT
-    m["REPLICA"] = REPLICA
-    m["MIN_REPLICA"] = MIN_REPLICA
-    m["WRITE_BLOCK_TIMEOUT"] = WRITE_BLOCK_TIMEOUT
-    m["REPLICA_BLOCK_TIMEOUT"] = REPLICA_BLOCK_TIMEOUT
-    m["GATHER_BLOCK_TIMEOUT"] = GATHER_BLOCK_TIMEOUT
-    m["READ_BLOCK_TIMEOUT"] = READ_BLOCK_TIMEOUT
-    m["DEL_BLOCK_TIMEOUT"] = DEL_BLOCK_TIMEOUT
-    m["DETECT_BLOCK_TIMEOUT"] = DETECT_BLOCK_TIMEOUT
-    m["QUERY_BLOCK_TIMEOUT"] = QUERY_BLOCK_TIMEOUT
-    m["GOSSIP_TIMEOUT"] = GOSSIP_TIMEOUT
-    m["BLOCK_META_SYNC_INTERVAL"] = BLOCK_META_SYNC_INTERVAL
-    m["SWEEP_INTERVAL"] = SWEEP_INTERVAL
-    m["REBALANCE_INTERVAL"] = REBALANCE_INTERVAL
-    m["GC_INTERVAL"] = GC_INTERVAL
-    m["MAX_CONCURRENT_REPAIR"] = MAX_CONCURRENT_REPAIR
-    m["MAX_REBALANCE_IDLE"] = MAX_REBALANCE_IDLE
-    m["MAX_CONCURRENT_REBALANCE"] = MAX_CONCURRENT_REBALANCE
-    m["MAX_CONCURRENT_GC"] = MAX_CONCURRENT_GC
-    m["QUERY_REBALANCE_CACHE_TIMEOUT"] = QUERY_REBALANCE_CACHE_TIMEOUT
-    m["REBALANCE_OUT_TIME"] = REBALANCE_OUT_TIME
-    m["ACCESS_INTERMITTENT"] = ACCESS_INTERMITTENT
-    m["MAX_NODE_TIME_DIFF"] = MAX_NODE_TIME_DIFF
-    m["POLL_NEIGHBOR_INTERVAL"] = POLL_NEIGHBOR_INTERVAL
-    m["NODE_CLEANUP_TIME"] = NODE_CLEANUP_TIME
-    m["NODE_OUT_TIME"] = NODE_OUT_TIME
-    m["GOSSIP_NOTIFY_QUEUE_LENGTH"] = GOSSIP_NOTIFY_QUEUE_LENGTH
-    m["CPU_BUSY_THROTLLE"] = CPU_BUSY_THROTLLE
-    m["DISK_BUSY_THROTLLE"] = DISK_BUSY_THROTLLE
-    m["READ_QUEUE_LENGTH"] = READ_QUEUE_LENGTH
-    m["WRITE_QUEUE_LENGTH"] = WRITE_QUEUE_LENGTH
-    return
+	m = make(map[string]interface{})
+	m["MULTICAST_ADDR"] = MULTICAST_ADDR
+	m["BLOCK_SIZE"] = BLOCK_SIZE
+	m["DOMAIN_RING_SPOTS"] = DOMAIN_RING_SPOTS
+	m["DEVICE_WEIGHT_UNIT"] = DEVICE_WEIGHT_UNIT
+	m["REPLICA"] = REPLICA
+	m["MIN_REPLICA"] = MIN_REPLICA
+	m["WRITE_BLOCK_TIMEOUT"] = WRITE_BLOCK_TIMEOUT
+	m["REPLICA_BLOCK_TIMEOUT"] = REPLICA_BLOCK_TIMEOUT
+	m["GATHER_BLOCK_TIMEOUT"] = GATHER_BLOCK_TIMEOUT
+	m["READ_BLOCK_TIMEOUT"] = READ_BLOCK_TIMEOUT
+	m["DEL_BLOCK_TIMEOUT"] = DEL_BLOCK_TIMEOUT
+	m["DETECT_BLOCK_TIMEOUT"] = DETECT_BLOCK_TIMEOUT
+	m["QUERY_BLOCK_TIMEOUT"] = QUERY_BLOCK_TIMEOUT
+	m["GOSSIP_TIMEOUT"] = GOSSIP_TIMEOUT
+	m["BLOCK_META_SYNC_INTERVAL"] = BLOCK_META_SYNC_INTERVAL
+	m["SWEEP_INTERVAL"] = SWEEP_INTERVAL
+	m["REBALANCE_INTERVAL"] = REBALANCE_INTERVAL
+	m["GC_INTERVAL"] = GC_INTERVAL
+	m["MAX_CONCURRENT_REPAIR"] = MAX_CONCURRENT_REPAIR
+	m["MAX_REBALANCE_IDLE"] = MAX_REBALANCE_IDLE
+	m["MAX_CONCURRENT_REBALANCE"] = MAX_CONCURRENT_REBALANCE
+	m["MAX_CONCURRENT_GC"] = MAX_CONCURRENT_GC
+	m["QUERY_REBALANCE_CACHE_TIMEOUT"] = QUERY_REBALANCE_CACHE_TIMEOUT
+	m["REBALANCE_OUT_TIME"] = REBALANCE_OUT_TIME
+	m["ACCESS_INTERMITTENT"] = ACCESS_INTERMITTENT
+	m["MAX_NODE_TIME_DIFF"] = MAX_NODE_TIME_DIFF
+	m["POLL_NEIGHBOR_INTERVAL"] = POLL_NEIGHBOR_INTERVAL
+	m["NODE_CLEANUP_TIME"] = NODE_CLEANUP_TIME
+	m["NODE_OUT_TIME"] = NODE_OUT_TIME
+	m["GOSSIP_NOTIFY_QUEUE_LENGTH"] = GOSSIP_NOTIFY_QUEUE_LENGTH
+	m["CPU_BUSY_THROTLLE"] = CPU_BUSY_THROTLLE
+	m["DISK_BUSY_THROTLLE"] = DISK_BUSY_THROTLLE
+	m["READ_QUEUE_LENGTH"] = READ_QUEUE_LENGTH
+	m["WRITE_QUEUE_LENGTH"] = WRITE_QUEUE_LENGTH
+	return
 }
 
 func getDomainConfigSig() (domain_config_sig string) {
-    m := getDomainConfig()
+	m := getDomainConfig()
 
 	// get options
-    options := make([]string, 0)
-    for option := range m {
-        options = append(options, option)
-    }
+	options := make([]string, 0)
+	for option := range m {
+		options = append(options, option)
+	}
 
 	// sort options
 	sort.Strings(options)
@@ -147,14 +148,14 @@ func getDomainConfigSig() (domain_config_sig string) {
 
 // Load domain config
 func LoadDomainConfig() (err error) {
-    // calc default sig
-    DOMAIN_CONFIG_SIG = getDomainConfigSig()
+	// calc default sig
+	DOMAIN_CONFIG_SIG = getDomainConfigSig()
 
 	// parse ini file
 	confPath := path.Join(NODE_BASE_PATH, CONF_DIR, DOMAIN_CONF_FILE)
 	c, err := conf.ReadConfigFile(confPath)
 	if err != nil {
-	    // file not exist, use default values
+		// file not exist, use default values
 		return nil
 	}
 

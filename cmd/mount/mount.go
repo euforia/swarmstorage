@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/richardliao/swarm/modules/fs"
-	"github.com/richardliao/swarm/modules/swarm"
-	"github.com/richardliao/swarm/third_party/github.com/hanwen/go-fuse/fuse"
 	"os"
 	"time"
+
+	"github.com/euforia/swarmstorage/modules/fs"
+	"github.com/euforia/swarmstorage/modules/swarm"
+	"github.com/euforia/swarmstorage/third_party/github.com/hanwen/go-fuse/fuse"
 )
 
 var cmdMount = &Command{

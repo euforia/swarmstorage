@@ -133,9 +133,13 @@ Suppose nodebase path is /data/swarm.
 swarm
 -----
 
+0. Prepare domain::
+
+	swarm domaininit -domainid <DOMAIN_NAME>
+
 1. Prepare node base::
 
-    swarm nodeinit --nodebase /data/swarm  
+    swarm nodeinit -domaincert <CERT_GENERATED_FROM_ABOVE>
     Edit /data/swarm/conf/node.ini
     Optional copy domain.ini to /data/swarm/conf/domain.ini and edit
 

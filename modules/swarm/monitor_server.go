@@ -273,7 +273,7 @@ type MonitorVariableResponse struct {
 	RepairStatus      RepairStatus
 	MetaCache         MetaCache
 	RebalanceCache    string
-	DomainConfig       map[string]interface{}
+	DomainConfig      map[string]interface{}
 	ScoreSegs         []string
 	PrimaryScoreSegs  []string
 }
