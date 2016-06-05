@@ -135,11 +135,11 @@ swarm
 
 0. Prepare domain::
 
-	swarm domaininit -domainid <DOMAIN_NAME>
+	swarm domaininit -domainid swarm.local
 
 1. Prepare node base::
 
-    swarm nodeinit -domaincert <CERT_GENERATED_FROM_ABOVE>
+    swarm nodeinit -domaincert /tmp/domain.cert
     Edit /data/swarm/conf/node.ini
     Optional copy domain.ini to /data/swarm/conf/domain.ini and edit
 
